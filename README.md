@@ -162,8 +162,9 @@ https://docs.aws.amazon.com/ses/latest/DeveloperGuide/dashboardconfigureSESnotif
 
 The project uses pipenv which is a official recommended packaging tool to add packages/dependencies and generate very important Pipfile.lock which produces deterministic builds. Some python packages are not available in AWS Lambda for example elasticsearch. We need to pack them along with our code.
 
-
+```
 pipenv run pip install -r <(pipenv lock -r) --target ./
+```
 
 which will download and install all dependencies with specific versions written in the Pipfile.lock file
 
