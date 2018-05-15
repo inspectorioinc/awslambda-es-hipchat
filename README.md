@@ -115,11 +115,11 @@ https://docs.aws.amazon.com/lambda/latest/dg/get-started-create-function.html
 
 Select the Execution Role is the IAM role created above
 
-We should defind the following Environment Variables in advance
-**ELASTICSEARCH_URL**
-**ELASTICSEARCH_INDEX**
-**HIPCHAT_V2_TOKEN**
-**HIPCHAT_ROOMID**
+We should define the following Environment Variables in advance
+- **ELASTICSEARCH_URL**
+- **ELASTICSEARCH_INDEX**
+- **HIPCHAT_V2_TOKEN**
+- **HIPCHAT_ROOMID**
 
 which will be used in hipchat.py
 
@@ -171,6 +171,10 @@ which will download and install all dependencies with specific versions written 
 I wrote a small bash file to repeat zip and upload the AWS lambda zip ball file to AWS lambda  for every change. However, you can change it to make it works with a CI/CD such as Travis or Jenkins
 
 
+Besides, the code is self-explanation. The main lambda_handler function  writes to AWS ES and sends notification to hipchat channel. It is using aws-requests-auth lib which supports AWS Signature Version 4 
+
+
+ref : https://github.com/DavidMuller/aws-requests-auth/blob/master/README.md
 
 
 #Troubleshooting
