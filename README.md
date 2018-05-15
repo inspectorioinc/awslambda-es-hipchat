@@ -200,8 +200,6 @@ AuthorizationException: TransportError(403, u'
     "Message": "User: arn:aws:sts::XXXXXX:assumed-role/lambda_verifyEmailBounceComplaints/ES_test is not authorized to perform: es:ESHttpPost on resource: email-tracking"
 }
 ')
-
+```
 ref: 
 https://aws.amazon.com/blogs/security/how-to-control-access-to-your-amazon-elasticsearch-service-domain/
-
-```
