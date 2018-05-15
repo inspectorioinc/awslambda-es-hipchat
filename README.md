@@ -1,5 +1,5 @@
 
-#Introduction
+# Introduction
 
 Sometimes AWS cognito can't deliver the message to registered user for confirmation. We have a demand to track these messages and notify the bounced/complaint messages via a Hipchat channel. Here is the workflow
 
@@ -7,15 +7,14 @@ AWS cognito ----> AWS SES ---> AWS SNS ---> AWS Lambda ---> AWS Elasticsearch/Ki
 
 AWS SES has ability to handle such bounces and complaint emails.
 
-
-#Walkthrough steps
+# Walkthrough steps
 
 ## AWS cognito 
 
 Choose SES Region; for example, US East
 From Email, the email address you want to handle bouncing and complaining
 
-##AWS Elasticsearch 
+## AWS Elasticsearch 
 
 Granting access to AWS ES cluster's endpoint.
 Amazon ES adds support for an authorization layer by integrating with IAM.
@@ -49,7 +48,7 @@ We can attach the policies that we build in IAM or in the Amazon ES console to s
 
 To grant access to AWS Elasticsearch endpoint, either specify it in the AWS Elasticsearch Modify Access policy or in AWS IAM role attached to AWS Lambda function
 
-###Modify Access policy
+### Modify Access policy
 ```
 {
   "Version": "2012-10-17",
@@ -81,7 +80,7 @@ To grant access to AWS Elasticsearch endpoint, either specify it in the AWS Elas
 }
 ```
 
-###Create an IAM role which is attached to AWS Lambda function
+### Create an IAM role which is attached to AWS Lambda function
 ```
 {
     "Version": "2012-10-17",
@@ -110,7 +109,7 @@ To grant access to AWS Elasticsearch endpoint, either specify it in the AWS Elas
 }
 ```
 
-##Create AWS Lambda Function using Environment Variables:
+## Create AWS Lambda Function using Environment Variables:
 Use aws lambda cli or AWS Lambda console to create a lambda function.
 https://docs.aws.amazon.com/lambda/latest/dg/get-started-create-function.html
 
@@ -141,10 +140,10 @@ AWS_SESSION_TOKEN
 
 AWS_REGION is The AWS region where the Lambda function is executed. 
 
-###Note:
+### Note:
 the Lambda handle name must be the name of the main file (omit .py) and the lambda_handler function name (eg: hipchat.lambda_handler) 
 
-##Invoking AWS Lambda function using AWS SNS notification
+## Invoking AWS Lambda function using AWS SNS notification
 
 - Create a SNS topic
 - Subscribe to topic: choose protocol which is the AWS Lambda function and the Endpoint is the AWS Lambda ARN above.
@@ -152,7 +151,7 @@ the Lambda handle name must be the name of the main file (omit .py) and the lamb
 https://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html
 
 
-##Configure AWS SES to notify SNS
+## Configure AWS SES to notify SNS
 In AWS SES console, Email Address > Click on the email address configured to deliver message from cognito.
 
 Under Notification section, choose the Amazon SNS topic we created above for both Bounces and Complaints
@@ -160,7 +159,7 @@ Under Notification section, choose the Amazon SNS topic we created above for bot
 https://docs.aws.amazon.com/ses/latest/DeveloperGuide/dashboardconfigureSESnotifications.html
 
 
-##Code Explaining
+## Tools and Code Explanation 
 
 The project uses pipenv which is a official recommended packaging tool to add packages/dependencies and generate very important Pipfile.lock which produces deterministic builds. Some python packages are not available in AWS Lambda for example elasticsearch. We need to pack them along with our code.
 
