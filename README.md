@@ -11,8 +11,7 @@ AWS SES has ability to handle such bounces and complaint emails.
 
 ## AWS cognito 
 
-Choose SES Region; for example, US East
-From Email, the email address you want to handle bouncing and complaining
+In Message Customizations section, select SES Region drop-down box; for example, US East if your SES is set up there. Select  the email address you want to handle bouncing and complaining from Email drop-down box.
 
 ## AWS Elasticsearch 
 
