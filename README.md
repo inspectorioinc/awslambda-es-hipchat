@@ -1,7 +1,6 @@
 
 #Introduction
 
-
 Sometimes AWS cognito can't deliver the message to registered user for confirmation. We have a demand to track these messages and notify the bounced/complaint messages via a Hipchat channel. Here is the workflow
 
 AWS cognito ----> AWS SES ---> AWS SNS ---> AWS Lambda ---> AWS Elasticsearch/Kibana and Hipchat
@@ -10,6 +9,7 @@ AWS SES has ability to handle such bounces and complaint emails.
 
 
 #Walkthrough steps
+
 ## AWS cognito 
 
 Choose SES Region; for example, US East
@@ -142,8 +142,9 @@ AWS_SESSION_TOKEN
 AWS_REGION is The AWS region where the Lambda function is executed. 
 
 ###Note:
-the Lambda handle name must be the name of the main file (omit .py) and the hipchat.lambda_handler 
-Invoking AWS Lambda function using AWS SNS notification
+the Lambda handle name must be the name of the main file (omit .py) and the lambda_handler function name (eg: hipchat.lambda_handler) 
+
+##Invoking AWS Lambda function using AWS SNS notification
 
 - Create a SNS topic
 - Subscribe to topic: choose protocol which is the AWS Lambda function and the Endpoint is the AWS Lambda ARN above.
@@ -203,3 +204,7 @@ AuthorizationException: TransportError(403, u'
 ```
 ref: 
 https://aws.amazon.com/blogs/security/how-to-control-access-to-your-amazon-elasticsearch-service-domain/
+
+```
+MAINTAINER Inspectorio DevOps <devops@inspectorio.com>
+```
