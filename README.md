@@ -208,6 +208,20 @@ AuthorizationException: TransportError(403, u'
 ref: 
 https://aws.amazon.com/blogs/security/how-to-control-access-to-your-amazon-elasticsearch-service-domain/
 
+###Test
+run the test
+```
+cd test
+aws --region us-east-1 ses send-email --from verification@inspectorio.com  --destination file://destination.json --message file://message.json
+```
+ToAddresses can be set to 
+<a valid email address>
+bounce@simulator.amazonses.com
+complaint@simulator.amazonses.com
+
+the notificationType in the message written to ES will be alternatively 
+Delivery,Bounce, and Complaints
+
 ```
 MAINTAINER Inspectorio DevOps <devops@inspectorio.com>
 ```

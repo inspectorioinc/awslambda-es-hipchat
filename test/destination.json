@@ -1,0 +1,5 @@
+{
+  "ToAddresses":  ["bounce@simulator.amazonses.com"],
+  "CcAddresses":  [],
+  "BccAddresses": []
+}

@@ -105,17 +105,20 @@ def lambda_handler(event, context):
             message = sns['Subject']
         else:
             message = sns['Message']
-
         #write to elastic search       
         es_client.index(index=index_name, doc_type='events',
                             body=message)
         print ('Suceeded to write into {0}'.format(es_host))
-        #notify hipchat                            
-        try:
-            hipchat_notify(token=hipchat_v2_token, room=int(hipchat_room_id),message=message, notify=True,format='html')
-        except Exception as e:
-            msg = "[ERROR] HipChat notify failed: '{0}'".format(e)
-            print(msg)
-            return "Failed"
+        
+        message_dict = json.loads(message)
+        #notify hipchat
+        msg_type = message_dict.get('notificationType')
+        if msg_type in ["Bounce", "Complaint"]:
+            try:
+                hipchat_notify(token=hipchat_v2_token, room=int(hipchat_room_id),message=message, notify=True,format='html')
+            except Exception as e:
+                msg = "[ERROR] HipChat notify failed: '{0}'".format(e)
+                print(msg)
+                return "Failed"
         
         return "Success"
